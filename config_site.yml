@@ -1,0 +1,247 @@
+# Jekyll configuration for Open SDG platform
+
+# Tell the Remote Theme plugin to use the Open SDG platform (Jekyll theme).
+remote_theme: open-sdg/open-sdg@1.4.0
+#remote_theme: brockfanning/open-sdg@map-disaggregation-select
+
+# Replace this title as needed.
+title: Indicadores ODS Municipales de Andalucía
+# Replace the baseurl with the name of this repository.
+baseurl: "/ods-municipios-andalucia"
+environment: staging
+source: www
+remote_data_prefix: _build
+
+# The list of languages that are translated. The first one is the default.
+languages:
+  # - en
+  - es
+
+# URL for the "Edit Data" button on indicators.
+data_edit_url: http://prose.io/#ods-municipios-andalucia/ods-municipios-andalucia/edit/develop/data/indicator_[id].csv
+# URL for the "Edit Metadata" button on indicators.
+metadata_edit_url: http://prose.io/#ods-municipios-andalucia/ods-municipios-andalucia/edit/develop/meta/[id].md
+
+# Automatically create indicator pages, goal pages,
+# and some other required pages.
+create_indicators:
+  layout: indicator
+create_goals:
+  layout: goal-by-target-vertical
+create_pages:
+  - folder: /
+    layout: frontpage-alt
+  - folder: /goals
+    layout: goals
+  - folder: /reporting-status
+    layout: reportingstatus
+  - filename: indicators.json
+    folder: /
+    layout: indicator-json
+  - folder: /search
+    layout: search
+
+#analytics:
+#  ga_prod: ''
+
+# Sticky share buttons (facebook, twitter and email)
+#sharethis_property: ''
+
+# Replace the email addresses below.
+email_contacts:
+  questions: informacion.ieca@juntadeandalucia.es
+  suggestions: informacion.ieca@juntadeandalucia.es
+  functional: informacion.ieca@juntadeandalucia.es
+
+# International Support
+# Eg name: Australia and adjective: Australian
+country:
+  name: Australia
+  adjective: Australian
+
+# Optionally set a title/body for the frontpage banner. The defaults below point to a standard
+# translation, but feel free to change it as needed.
+frontpage_introduction_banner:
+  title: my-custom-translations.intro_title
+  description: my-custom-translations.intro_body
+
+frontpage_goals_grid:
+  title: my-custom-translations.my-goals-grid-title
+  description: my-custom-translations.my-goals-grid-description
+
+frontpage_cards:
+  - title: frontpage.download_all
+    include: components/download-all-data.html
+  - title: Información metodológica del proyecto
+    # content: |
+    #  El Sistema de Indicadores de Desarrollo Sostenible de Andalucía para la Agenda 2030 tiene por objetivo constituir un marco de indicadores estadísticos, alineados con los establecidos por Naciones Unidas, que sirva para el seguimiento, a diferentes niveles territoriales, de los objetivos y metas de la Agenda 2030 para el Desarrollo Sostenible de las Naciones Unidas.
+    button_label: Descargar 
+    button_link: https://ods-municipios-andalucia.github.io/ods-municipios-andalucia/assets/download/pdf/Methodology_Report.pdf    
+  - title: Sistema de Indicadores de Desarrollo Sostenible de Andalucía para la Agenda 2030
+    # content: |
+    #  El Sistema de Indicadores de Desarrollo Sostenible de Andalucía para la Agenda 2030 tiene por objetivo constituir un marco de indicadores estadísticos, alineados con los establecidos por Naciones Unidas, que sirva para el seguimiento, a diferentes niveles territoriales, de los objetivos y metas de la Agenda 2030 para el Desarrollo Sostenible de las Naciones Unidas.
+    button_label: Acceder 
+    button_link: https://www.juntadeandalucia.es/institutodeestadisticaycartografia/ods/index.htm
+#  - title: Nam vestibulum
+#    content: |
+#      Nam vestibulum, purus quis porttitor imperdiet, nisl sem mollis nisl, a
+#      interdum risus enim vitae tortor. Donec feugiat accumsan rutrum.
+#    button_label: Read more
+#    button_link: https://example.com
+
+# Pages
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+  posts:
+    output: true
+    permalink: /news/:year/:month/:day/:title.html
+  indicators:
+    output: true
+  goals:
+    output: true
+
+# Menu
+menu:
+  # Use these to customise the main navigation.
+  - path: /goals
+    # The "translation_key" refers to the key in the SDG Translations repository.
+    translation_key: general.goals
+  - path: /reporting-status
+    translation_key: menu.reporting_status
+  - path: /about
+    translation_key: menu.about
+  # - path: /guidance
+  #   translation_key: menu.guidance
+  # - path: /faq
+  #   translation_key: menu.faq
+  # - path: /news
+  #   translation_key: menu.updates
+
+footer_menu:
+  - path: mailto:informacion.ieca@juntadeandalucia.es
+    translation_key: menu.contact_us
+  # - path: https://twitter.com/MyTwitterAccount
+  #   translation_key: general.twitter
+  # - path: https://facebook.com/MyFacebookAccount
+  #   translation_key: general.facebook
+  - path: /about/cookies-and-privacy/
+    translation_key: my-custom-translations.cookies
+
+# Configure the text (or "translation key") to be used on the
+# non-global metadata tab.
+non_global_metadata: indicator.national_metadata
+
+# Set a base for all goal image URLs. Note that the full goal image path will be
+# the base below, completed with: /[language]/[number].png (eg, /fr/6.png).
+goal_image_base: https://open-sdg.github.io/sdg-translations/assets/img/goals
+
+# Tell Jekyll to use the Remote Theme plugin.
+plugins:
+  - jekyll-remote-theme
+  - jekyll-open-sdg-plugins
+
+# Exclude some files/folders.
+exclude:
+  - vendor
+  - scripts
+  - remotedata
+  - Gemfile
+  - Gemfile.lock
+  - README
+  - README.md
+  - LICENSE
+  - Makefile
+
+# Optionally uncomment and update the settings below to control the mapping functionality.
+# These are only a few of the possible settings. For more details, see:
+# https://open-sdg.readthedocs.io/en/latest/maps/
+map_options:
+  minZoom: 5
+  tileURL: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+  tileOptions:
+    attribution: '<a  href="https://www.openstreetmap.org/copyright/en" target="_blank">© OpenStreetMap</a> contributtors | <a href="https://www.juntadeandalucia.es/institutodeestadisticaycartografia/" target="_blank">Instituto de Estadística y Cartografía de Andalucía</a>'
+  # Control the choropleth color range. See https://gka.github.io/chroma.js/#chroma-brewer
+  colorRange: chroma.brewer.YlGnBu
+  #colorRange: ["#F6E8EC", "#E3BAC6", "#D18CA1", "#BE5E7B", "#AB3055", "#A21942", "#821435", "#610F28", "#410A1A", "#20050D"]
+  # Set the color for boundaries that have no data.
+  noValueColor: "#f0f0f0"
+  # For documentation on the style options below, see here:
+  # https://leafletjs.com/reference-1.4.0.html#path-option
+  # Set the default style for boundaries in the map:
+  styleNormal:
+    weight: 0.3
+    opacity: 1
+    color: "#888888"
+    fillOpacity: 0.9
+  # Set the style for boundaries that have been selected/highlighted:
+  styleHighlighted:
+    weight: 0.3
+    opacity: 1
+    color: "#111111"
+    fillOpacity: 0.9
+  # Set the style for top-level boundaries that are displaying in other layers.
+  # Note: This is only applicable when using the "nested zoom" feature (see below).
+  styleStatic:
+    weight: 0.3
+    opacity: 1
+    fillOpacity: 0.9
+    color: "#172d44"
+    dashArray: 5,5    
+    
+map_layers:
+  - min_zoom: 5
+    max_zoom: 18
+    subfolder: regions
+  # label: my-custom-translations.map
+
+# Recommend accessibility improvements.
+accessible_tabs: true
+accessible_charts: true
+graph_color_set: accessible
+
+# Specify any custom javascript files.
+custom_js:
+  - /assets/js/custom.js
+
+# Specify the format of the language toggles. Choices are:
+# "dropdown", "links", or "none"
+header_language_toggle: dropdown
+footer_language_toggle: none
+
+# Configure the header style.
+header:
+  include: header-menu-left-aligned.html
+
+# Specify whether the Series disaggregation should be a toggle (like units).
+series_toggle: true
+
+# Control the behavior of breadcrumbs for certain types of content.
+breadcrumbs:
+  post:
+    - label: general.home
+      path: /
+    - label: menu.updates
+      path: /news
+  goal:
+    - label: general.home
+      path: /
+    - label: my-custom-translations.goals
+      path: /goals
+  indicator:
+    - label: general.home
+      path: /
+    - label: my-custom-translations.goals
+      path: /goals
+
+metadata_tabs:
+  - scope: national
+    title: my-custom-translations.national_metadata
+  #   description: indicator.national_metadata_blurb
+  # - scope: global
+  #   title: indicator.global_metadata
+  #   description: indicator.global_metadata_blurb
+  # - scope: sources
+  #   title: indicator.sources
+  #   description: ''
